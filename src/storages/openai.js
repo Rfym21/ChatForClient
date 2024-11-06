@@ -3,21 +3,32 @@ import { reactive } from 'vue'
 
 export const useOpenaiStorage = defineStore('openai', () => {
   const config = reactive({
-    baseUrl: localStorage.getItem("baseUrl")  || "https://www.yikeapi.me/v1",
-    apiKey: localStorage.getItem("apiKey")  || "sk-BxfnHW0AD29NrVD5ptSbWdRVq16mY3C2OQDNIX2tEpS5eWpb",
+    baseUrl: localStorage.getItem("baseUrl") || "https://client.yikeapi.me/v1",
+    apiKey: localStorage.getItem("apiKey") || "sk-rfym21-chatforclient",
   })
   const state = reactive({
-    models: [],
-    prompt: "",
-    maxTokens: 8192,
-    temperature: 1,
+    models: localStorage.getItem("models") ? JSON.parse(localStorage.getItem("models")) : [],
+    prompt: localStorage.getItem("prompt") || "",
+    max_tokens: localStorage.getItem("max_tokens") || 8192,
+    temperature: localStorage.getItem("temperature") || 0.3,
     model: localStorage.getItem("model") || null,
   })
-  const messageList = reactive([])
+  const messages = reactive(localStorage.getItem("messages") ? JSON.parse(localStorage.getItem("messages")) : [
+    {
+      id: new Date().getTime(),
+      title: "New Chat",
+      messages: [
+        {
+          role: "assistant",
+          content: "你好，我是铠甲勇士！\n你好，我是铠甲勇士！\n你好，我是铠甲勇士！\n你好，我是铠甲勇士！\n你好，我是铠甲勇士！\n你好，我是铠甲勇士！\n你好，我是铠甲勇士！\n你好，我是铠甲勇士！\n你好，我是铠甲勇士！\n"
+        }
+      ]
+    }
+  ])
 
   return {
     config,
     state,
-    messageList
+    messages
   }
 })
