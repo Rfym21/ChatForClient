@@ -22,7 +22,6 @@ import SettingWarp from '../components/SettingWarp.vue'
 
 
 // BScroll
-import BScroll from '@better-scroll/core'
 import { useOpenaiStorage } from '../storages/openai.js'
 import { useState } from '../storages/state.js'
 

@@ -3,7 +3,7 @@ import { reactive } from 'vue'
 import avatar from '../assets/images/avatar.png'
 import { useOpenaiStorage } from './openai.js'
 
-const messages = useOpenaiStorage().messages
+const messageManager = useOpenaiStorage().messageManager
 
 export const useState = defineStore('state', () => {
   const state = reactive({
@@ -11,16 +11,13 @@ export const useState = defineStore('state', () => {
     isTalking: false,
     NavVisible: false,
     SettingVisible: false,
-    chatWrapBS: null,
-    chatListWrapBS: null,
     avatar: avatar,
-    chatWrap: null,
-    messagesManger: null,
     messageContentLength: 25,
     NavNotice: "听说这里可以写签名！",
     NavTitle: "如风雨沐丷",
     titleChangeStatus: false,
-    messagesIndex: messages[0].id
+    messagesIndex: messageManager.messages[0].id,
+    modelChangeVisible: false
   })
   return {
     state

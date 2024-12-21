@@ -7,9 +7,10 @@ const state = openaiStore.state
 const client = new OpenAI({
   baseURL: config.baseUrl,
   apiKey: config.apiKey,
+  dangerouslyAllowBrowser: true // 启用浏览器端使用
 })
 
-async function chatNoStream(messages) {
+const chatNoStream = async (messages) => {
   try {
     // 如果 messages 为 undefined 或 null，则返回 false
     if (messages === undefined || messages === null) {
@@ -56,12 +57,10 @@ const chatStream = async (messages) => {
     max_tokens: state.max_tokens,
     temperature: state.temperature
   })
-  return Promise((resolve, reject) => {
-    for await (const chunk of stream) {
-      result += chunk.choices[0]?.delta?.content || ''
-    }
-    resolve(result)
-  })
+
+  for await (const chunk of stream) {
+    console.log(chunk.choices[0]?.delta?.content || '');
+  }
 }
 
 export {

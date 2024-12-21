@@ -131,7 +131,6 @@ const saveMaxTokens = () => {
   }
 }
 
-setInterval(()=>{console.log(openaiState.max_tokens)},1000)
 </script>
 
 <style lang="css" scoped></style>

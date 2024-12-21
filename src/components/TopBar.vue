@@ -5,8 +5,9 @@
       <img src="../assets/ico/nav-left.png" alt="" class=" w-8 h-8">
     </button>
 
-    <div class="text-xl font-bold flex-1 text-center">
+    <div class="text-xl font-bold flex-1 text-center" @click="modelChangeFunction">
       {{ openaiStorage.state.model || '暂未选择模型' }}
+      <modelChange></modelChange>
     </div>
 
     <button class="w-12 h-8 rounded-lg hover:bg-gray-200 px-2 py-1" @click="state.SettingVisible = true">
@@ -19,9 +20,14 @@
 <script setup>
 import { useOpenaiStorage } from '../storages/openai.js'
 import { useState } from '../storages/state.js'
+import modelChange from './modelChange.vue'
 
 const openaiStorage = useOpenaiStorage()
 const state = useState().state
+
+const modelChangeFunction = () => {
+  state.modelChangeVisible = true
+}
 
 </script>
 
